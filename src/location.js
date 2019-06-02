@@ -56,3 +56,21 @@ class msa extends location{
         console.log(population)
     }
 }
+class place extends location{
+    constructor(name, year = 2017){
+        super(name, year)
+        this.name = name;
+        this.year = year
+    }
+    async getAllPopulation() {
+        const population = await fetch(`https://datausa.io/api/data?drilldown=${user.choice}&measures=Population`)
+        .then(response => response.json())
+        .catch(err => console.log(err))
+        console.log(population)
+    }
+    async getPopulation(location){
+        const population = await this.getAllPopulation()
+        
+        
+    }
+}
