@@ -1,5 +1,7 @@
 const fetch = require('node-fetch');
-
+const user = {
+    choice = document.getElementById()
+}
 class location{
     constructor(id, name, population, year = 2017){
         this.id = id,
@@ -10,6 +12,20 @@ class location{
     }
     
 }
+class nation extends location{
+    constructor(name, year = 2017){
+        super(name, year)
+        this.name = name;
+        this.year = year;
+    }
+    async getAllPopulation(){
+        const population = await fetch(`https://datausa.io/api/data?drilldowns=${user.choice}&measures=Population`)
+        .then(response => response.json())
+        .catch(err => console.log(err))
+
+        console.log(population.data[0].Population)
+    }
+}
 class state extends location{
     constructor(name, year = 2017){
         super(name, year)
@@ -17,7 +33,7 @@ class state extends location{
         this.year = year;
     }
     async getAllPopulation(){
-        const population = await fetch(`https://datausa.io/api/data?drilldowns=State&measures=Population`)
+        const population = await fetch(`https://datausa.io/api/data?drilldowns=${user.choice}&measures=Population`)
         .then(response => response.json())
         
         console.log(population)
@@ -28,9 +44,15 @@ class state extends location{
     
 }
 class msa extends location{
-    constructor(){
-        super()
+    constructor(name, year = 2017){
+        super(name, year)
+        this.name = name;
+        this.year = year
+    }
+    async getAllPopulation() {
+        const population = await fetch(`https://datausa.io/api/data?drilldown=Msa&measures=Population`)
+        .then(response => response.json())
+        .catch(err => console.log(err))
+        console.log(population)
     }
 }
-const result = new state()
-result.getAllPopulation()
