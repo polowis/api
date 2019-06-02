@@ -1,3 +1,5 @@
-const chai = require('chai')
-const location = require('../src/location')
+import {chai} from 'chai'
+import {state} from '../src/location'
+
+
 

@@ -1,6 +1,6 @@
 const fetch = require('node-fetch');
 
-module.exports = class location{
+ class location{
     constructor(id, name, population, year = 2017){
         this.id = id,
         this.name = name,
@@ -35,6 +35,7 @@ module.exports = class location{
         const population = await fetch(`https://datausa.io/api/data?drilldowns=State&measures=Population`)
         .then(response => response.json())
         .catch(err => console.log(err))
+        console.log(population)
         //console.log(population.data[0])
         
 
@@ -42,23 +43,23 @@ module.exports = class location{
         
         
     }
-    async getPopulation(location){
+    async getPopulationByName(location){
         const population =  await fetch(`https://datausa.io/api/data?drilldowns=State&measures=Population`)
         .then(response => response.json())
         .catch(err => console.log(err))
         const info = population.data.find(pop => pop.State === location)
-        console.log(info)
-        console.log(info.Population)
-       // const data1 = (population.indexOf("Georgia") > -1)
-       // console.log(population.data.State == 'Georgia')
-       // const data = population.data[].State
-       /* for(let i = 0; i < population; i++){
-            if(i == 'Georgia'){
-                console.log(population.data[i].Population)
-            }
-        }*/
-       // const result = population.find(population => population.data.State === 'Georgia')
-       // console.log(result)
+        
+        if(!info){
+            console.log('No result found')
+        }
+     
+    }
+    async getPopulationById(id){
+        const population = await fetch(`https://datausa.io/api/data?drilldowns=State$mesures=Population`)
+        .then(response => response.json())
+        .cacth(err => console.log(err))
+        const info = population.data.find(pop => pop.IDState == id)
+        console.log(info);
     }
     
 }
@@ -131,6 +132,5 @@ class county extends location{
         console.log(population)
     }
 }
-
-result = new state();
-result.getPopulation('Georgia')
+var result = new state().getAllPopulation()
+var result2 = new state().getPopulationById('04000US42')
