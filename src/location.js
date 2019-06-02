@@ -1,6 +1,6 @@
 const fetch = require('node-fetch');
 
-class location{
+module.exports = class location{
     constructor(id, name, population, year = 2017){
         this.id = id,
         this.name = name,
@@ -10,7 +10,7 @@ class location{
     }
     
 }
-class nation extends location{
+ class nation extends location{
     constructor(name, year = 2017){
         super(name, year)
         this.name = name;
@@ -25,7 +25,7 @@ class nation extends location{
     }
     
 }
-class state extends location{
+ class state extends location{
     constructor(name, year = 2017){
         super(name, year)
         this.name = name;
@@ -34,12 +34,31 @@ class state extends location{
     async getAllPopulation(){
         const population = await fetch(`https://datausa.io/api/data?drilldowns=State&measures=Population`)
         .then(response => response.json())
+        .catch(err => console.log(err))
+        //console.log(population.data[0])
         
-        console.log(population)
+
+        
+        
+        
     }
     async getPopulation(location){
-        const population = await this.getAllPopulation();
-
+        const population =  await fetch(`https://datausa.io/api/data?drilldowns=State&measures=Population`)
+        .then(response => response.json())
+        .catch(err => console.log(err))
+        const info = population.data.find(pop => pop.State === location)
+        console.log(info)
+        console.log(info.Population)
+       // const data1 = (population.indexOf("Georgia") > -1)
+       // console.log(population.data.State == 'Georgia')
+       // const data = population.data[].State
+       /* for(let i = 0; i < population; i++){
+            if(i == 'Georgia'){
+                console.log(population.data[i].Population)
+            }
+        }*/
+       // const result = population.find(population => population.data.State === 'Georgia')
+       // console.log(result)
     }
     
 }
@@ -57,7 +76,11 @@ class msa extends location{
     }
 
     async getPopulation(location){
-        const population = await this.getAllPopulation()
+        const population =  await fetch(`https://datausa.io/api/data?drilldowns=Msa&measures=Population`)
+        .then(response => response.json())
+        .catch(err => console.log(err))
+        const info = population.data.find(pop => pop.Msa === location)
+        console.log(info)
         
         
         
@@ -108,3 +131,6 @@ class county extends location{
         console.log(population)
     }
 }
+
+result = new state();
+result.getPopulation('Georgia')

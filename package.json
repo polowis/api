@@ -35,6 +35,8 @@
     "devtron": "^1.4.0",
     "electron-packager": "^13.1.1",
     "electron-winstaller": "^3.0.4",
-    "mocha": "^6.1.4"
+    "husky": "^2.3.0",
+    "mocha": "^6.1.4",
+    "spectron": "^5.0.0"
   }
 }
