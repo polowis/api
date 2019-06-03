@@ -55,7 +55,8 @@ const fetch = require('node-fetch');
      
     }
     async getPopulationById(id){
-        const population = await fetch(`https://datausa.io/api/data?drilldowns=State$mesures=Population`)
+        const population =  await fetch(`https://datausa.io/api/data?drilldowns=State&measures=Population`)
+       // const population = await fetch(`https://datausa.io/api/data?drilldowns=State$measures=Population`)
         .then(response => response.json())
         .cacth(err => console.log(err))
         const info = population.data.find(pop => pop.IDState == id)
@@ -132,5 +133,5 @@ class county extends location{
         console.log(population)
     }
 }
-var result = new state().getAllPopulation()
+//var result = new state().getAllPopulation()
 var result2 = new state().getPopulationById('04000US42')
