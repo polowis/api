@@ -8,6 +8,7 @@ const fetch = require('node-fetch');
         this.year = year
 
     }
+
     
 }
  class nation extends location{
@@ -59,7 +60,7 @@ const fetch = require('node-fetch');
        // const population = await fetch(`https://datausa.io/api/data?drilldowns=State$measures=Population`)
         .then(response => response.json())
         .cacth(err => console.log(err))
-        const info = population.data.find(pop => pop.IDState == id)
+        const info = population.data.find(pop => pop.IDState === id)
         console.log(info);
     }
     
@@ -100,8 +101,11 @@ class place extends location{
         .catch(err => console.log(err))
         console.log(population)
     }
-    async getPopulation(location){
-        const population = await this.getAllPopulation()
+    async getPopulationByName(location){
+        const population = await fetch(`https://datausa.io/pi/data?drilldown=Place&measures=Population`)
+        .then(response => response.json())
+        .catch(err => console.log(err))
+        const info = population.data.find(pop => pop.Place === location)
 
         
         
