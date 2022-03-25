@@ -20,7 +20,7 @@
   },
   "homepage": "https://github.com/polowis/api#readme",
   "dependencies": {
-    "electron": "^7.2.4",
+    "electron": "^13.6.6",
     "electron-log": "^3.0.6",
     "electron-settings": "^3.2.0",
     "electron-shortcut-normalizer": "^1.0.0",
